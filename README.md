@@ -108,4 +108,3 @@ Scan QR using Expo Go (Android/iOS)
 - Clean mobile UI design principles
 - Handling lifecycle of location tracking
 
-## 📁 Project Structure
