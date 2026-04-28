@@ -49,7 +49,7 @@ A **React Native (Expo)** mobile application designed to simulate real-time deli
 ### 1. Clone the repository
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/Satyaswarup11/DeliveryTracker.git
 cd DeliveryTracker
 ```
 
