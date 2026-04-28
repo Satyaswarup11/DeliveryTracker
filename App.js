@@ -3,7 +3,7 @@ import { useStore } from './src/store/useStore';
 import LoginScreen from './src/screens/LoginScreen';
 import DriverScreen from './src/screens/DriverScreen';
 import ManagerScreen from './src/screens/ManagerScreen';
-import ManagerOrderDetailScreen from './src/screens/ManagerOrderDetailScreen';
+import OrderTrackScreen from './src/screens/OrderTrackScreen';
 
 export default function App() {
   const role = useStore((s) => s.role);
@@ -15,7 +15,7 @@ export default function App() {
   }, []);
 
   if (!role) return <LoginScreen />;
-  if (selectedOrder) return <ManagerOrderDetailScreen />;
+  if (selectedOrder) return <OrderTrackScreen />;
   if (role === "driver") return <DriverScreen />;
   if (role === "manager") return <ManagerScreen />;
 }

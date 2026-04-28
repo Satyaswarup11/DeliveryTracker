@@ -5,7 +5,7 @@ import { useStore } from '../store/useStore';
 import MapView from '../components/MapView';
 import { colors, spacing, typography } from '../styles';
 
-export default function ManagerOrderDetailScreen() {
+export default function OrderTrackScreen() {
   const order = useStore((s) => s.selectedOrder);
   const location = useStore((s) => s.currentLocation);
   const back = useStore((s) => s.clearSelectedOrder);
