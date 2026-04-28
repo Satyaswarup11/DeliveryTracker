@@ -19,7 +19,6 @@ export default function DriverScreen() {
   const active = orders.filter(o => o.status !== "pending");
   const available = orders.filter(o => o.status === "pending");
 
-  // 📍 LOCATION TRACKING
   useEffect(() => {
     let sub;
 
@@ -34,7 +33,6 @@ export default function DriverScreen() {
           distanceInterval: 1,
         },
         (loc) => {
-          console.log("📍 LOCATION:", loc.coords);
           setLocation(loc.coords);
         }
       );
@@ -45,16 +43,13 @@ export default function DriverScreen() {
     return () => sub && sub.remove();
   }, [isTracking]);
 
-  // 🔥 STATUS FLOW
   const accept = (id) => {
     update(id, "accepted");
     startTracking();
     Alert.alert("Success", "Shipment assigned");
   };
 
-  const markTransit = (id) => {
-    update(id, "transit");
-  };
+  const markTransit = (id) => update(id, "transit");
 
   const markDelivered = (id) => {
     update(id, "delivered");
@@ -77,25 +72,26 @@ export default function DriverScreen() {
         <Text style={section}>ACTIVE SHIPMENTS</Text>
 
         {active.map(o => (
-          <View key={o.id} style={card}>
+          <View key={o.id} style={cardNew}>
+            
             <Ionicons name="cube-outline" size={24} color={colors.primary} />
 
             <View style={{ marginLeft: 10, flex: 1 }}>
               <Text style={title}>ORD00{o.id}</Text>
               <Text>{o.customer}</Text>
               <Text style={{ fontSize: 12, color: "#666" }}>
-                Status: {o.status}
+                {o.status.toUpperCase()}
               </Text>
 
               {o.status === "accepted" && (
-                <TouchableOpacity style={btn} onPress={() => markTransit(o.id)}>
-                  <Text style={{ color: "#fff" }}>Start Transit</Text>
+                <TouchableOpacity style={btnNew} onPress={() => markTransit(o.id)}>
+                  <Text style={btnText}>Start Transit</Text>
                 </TouchableOpacity>
               )}
 
               {o.status === "transit" && (
-                <TouchableOpacity style={btn} onPress={() => markDelivered(o.id)}>
-                  <Text style={{ color: "#fff" }}>Mark Delivered</Text>
+                <TouchableOpacity style={btnNew} onPress={() => markDelivered(o.id)}>
+                  <Text style={btnText}>Mark Delivered</Text>
                 </TouchableOpacity>
               )}
             </View>
@@ -105,15 +101,20 @@ export default function DriverScreen() {
         <Text style={section}>AVAILABLE</Text>
 
         {available.map(o => (
-          <View key={o.id} style={card}>
-            <Text style={title}>ORD00{o.id}</Text>
-            <Text>{o.customer}</Text>
+          <View key={o.id} style={cardNew}>
+            
+            <View style={{ flex: 1 }}>
+              <Text style={title}>ORD00{o.id}</Text>
+              <Text>{o.customer}</Text>
+            </View>
 
-            <TouchableOpacity style={btn} onPress={() => accept(o.id)}>
-              <Text style={{ color: "#fff" }}>Accept Shipment</Text>
+            <TouchableOpacity style={btnNew} onPress={() => accept(o.id)}>
+              <Text style={btnText}>Accept</Text>
             </TouchableOpacity>
+
           </View>
         ))}
+
       </ScrollView>
     </SafeAreaView>
   );
@@ -128,22 +129,30 @@ const header = {
 
 const headerText = { color: "#fff", fontSize: 18 };
 
-const section = { marginVertical: 10 };
+const section = { marginVertical: 10, fontWeight: "600" };
 
-const card = {
+const cardNew = {
   backgroundColor: "#fff",
   padding: 16,
-  borderRadius: 12,
-  marginBottom: 10,
+  borderRadius: 14,
+  marginBottom: 12,
   flexDirection: "row",
-  alignItems: "center"
+  alignItems: "center",
+  elevation: 2
 };
 
 const title = { fontWeight: "600" };
 
-const btn = {
-  marginTop: 10,
+const btnNew = {
+  marginTop: 8,
   backgroundColor: colors.primary,
-  padding: 10,
-  borderRadius: 10
+  paddingVertical: 8,
+  paddingHorizontal: 14,
+  borderRadius: 8,
+  alignSelf: "flex-start"
+};
+
+const btnText = {
+  color: "#fff",
+  fontSize: 13
 };
