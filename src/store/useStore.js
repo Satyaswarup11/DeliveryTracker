@@ -5,7 +5,7 @@ export const useStore = create((set) => ({
   user: null,
   role: null,
 
-  // 📦 Orders
+  //  Orders
   orders: [
     { id: 1, customer: "Rahul Sharma", status: "pending" },
     { id: 2, customer: "Priya Patel", status: "pending" },
@@ -16,11 +16,11 @@ export const useStore = create((set) => ({
 
   selectedOrder: null,
 
-  // 📍 🔥 TRACKING STATE (THIS WAS MISSING)
+  //  TRACKING STATE 
   currentLocation: null,
   isTracking: false,
 
-  // 🔐 Login
+  // Login
   login: async (email) => {
     let role = null;
 
@@ -64,7 +64,7 @@ export const useStore = create((set) => ({
     });
   },
 
-  // 📦 Order update
+  // Order update
   updateOrderStatus: (id, status) =>
     set((state) => ({
       orders: state.orders.map((o) =>
@@ -75,19 +75,19 @@ export const useStore = create((set) => ({
   selectOrder: (order) => set({ selectedOrder: order }),
   clearSelectedOrder: () => set({ selectedOrder: null }),
 
-  // 📍 🔥 LOCATION FUNCTIONS (CRITICAL)
+  // LOCATION FUNCTIONS 
   setLocation: (location) => {
-    console.log("📍 LOCATION UPDATE:", location);
+    console.log(" LOCATION UPDATE:", location);
     set({ currentLocation: location });
   },
 
   startTracking: () => {
-    console.log("🚀 TRACKING STARTED");
+    console.log(" TRACKING STARTED");
     set({ isTracking: true });
   },
 
   stopTracking: () => {
-    console.log("🛑 TRACKING STOPPED");
+    console.log(" TRACKING STOPPED");
     set({ isTracking: false });
   },
 }));
